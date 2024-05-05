@@ -28,52 +28,25 @@ export class TransaccionAsignacionPasatiempoComponent {
   displayedColumns = ["idPasatiempo","nombre",'actions'];
 
   constructor(private utilService: UtilService, private pasatiempoService: PasatiempoService){
-        this.utilService.listaUsuario().subscribe(
-            x   =>   this.lstUsuario =x
-        );
-        this.utilService.listaPasatiempo().subscribe(
-            x   =>   this.lstPasatiempo=x
-        );
+       
   }
 
 
   cargaPasatiempo(){
-    this.pasatiempoService.listaPasatiempoDeUsuario(this.usuario).subscribe(
-          x   => {
-                this.lstPasatiempoDeUsuario =x
-                this.dataSource = new MatTableDataSource(this.lstPasatiempoDeUsuario);
-                this.dataSource.paginator = this.paginator 
-          } 
-    );
+    
   }
 
   registraPasatiempo(){
       console.log(">> registraPasatiempo >>> ");
       console.log(">> this.usuario >>> " + this.usuario );
       console.log(">> this.pasatiempo >>> " + this.pasatiempo );
-      this.pasatiempoService.registraPasatiempo(this.usuario, this.pasatiempo).subscribe(
-          x => {
-            Swal.fire({ title: "Mensaje", text: x.mensaje, icon: "info" });
-            this.lstPasatiempoDeUsuario = x.lista
-            this.dataSource = new MatTableDataSource(this.lstPasatiempoDeUsuario);
-            this.dataSource.paginator = this.paginator 
 
-          }
-      );
   }
 
   eliminaPasatiempo(obj:Pasatiempo){
     console.log(">> eliminaPasatiempo >>> ");
     console.log(">> this.usuario >>> " + this.usuario );
     console.log(">> this.pasatiempo >>> " + this.pasatiempo );
-    this.pasatiempoService.eliminaPasatiempo(this.usuario, obj.idPasatiempo!).subscribe(
-      x => {
-        Swal.fire({ title: "Mensaje", text: x.mensaje, icon: "info" });
-        this.lstPasatiempoDeUsuario = x.lista
-        this.dataSource = new MatTableDataSource(this.lstPasatiempoDeUsuario);
-        this.dataSource.paginator = this.paginator 
-
-      }
-  );
+    
   }
 }
